@@ -1,2 +1,2 @@
-# WebTech
-Web technology projects
+# Mobile Application Programming
+Mobile Application projects
