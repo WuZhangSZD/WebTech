@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 
 void main() {
   runApp(const MyApp());
@@ -101,7 +102,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 child: Icon(
                   Icons.alarm,
                   color: iconcolor,
-                  size: _size - 50,
+                  size: _size - 20,
                 )),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -139,7 +140,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 Text('Size:$_size                   Roundness:$_roundness'),
                 Slider(
                     value: _size,
-                    min: 0.0,
+                    min: 50.0,
                     max: 300.0,
                     onChanged: (double newvalue) {
                       setState(() {
