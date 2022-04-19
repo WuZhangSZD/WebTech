@@ -48,18 +48,19 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  double _size = 0;
-  double _roundness = 0;
+  double _size = 200;
+  double _roundness = 50;
+  Color? bgcolor = Colors.blue[100];
+  Color? iconcolor = Colors.blue;
+  Color bordercolor = Colors.blue[900]!;
 
-  void _changetored() {
-    setState(() {});
+  void _change(Color? bg, Color? icon, Color? border) {
+    setState(() {
+      iconcolor = icon;
+      bgcolor = bg;
+      bordercolor = border!;
+    });
   }
-
-  void _changetogreen() {}
-  void _changetoblue() {}
-  void changeSize(double x) {}
-
-  void changeRoundness(double x) {}
 
   @override
   Widget build(BuildContext context) {
@@ -94,20 +95,20 @@ class _MyHomePageState extends State<MyHomePage> {
                 width: _size,
                 height: _size,
                 decoration: BoxDecoration(
-                    color: Colors.blue[100],
-                    border: Border.all(
-                        color: const Color.fromARGB(255, 3, 33, 153)),
+                    color: bgcolor,
+                    border: Border.all(width: 5.0, color: bordercolor),
                     borderRadius: BorderRadius.circular(_roundness)),
                 child: Icon(
                   Icons.alarm,
-                  color: Colors.blue,
-                  size: _size,
+                  color: iconcolor,
+                  size: _size - 50,
                 )),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 FloatingActionButton(
-                  onPressed: _changetored,
+                  onPressed: () =>
+                      _change(Colors.red[100], Colors.red, Colors.red[900]!),
                   tooltip: 'Red',
                   child: const Icon(
                     Icons.edit,
@@ -115,7 +116,8 @@ class _MyHomePageState extends State<MyHomePage> {
                   backgroundColor: Colors.red,
                 ),
                 FloatingActionButton(
-                  onPressed: _changetogreen,
+                  onPressed: () => _change(
+                      Colors.green[100], Colors.green, Colors.green[900]!),
                   tooltip: 'Green',
                   child: const Icon(
                     Icons.edit,
@@ -123,7 +125,8 @@ class _MyHomePageState extends State<MyHomePage> {
                   backgroundColor: Colors.green,
                 ),
                 FloatingActionButton(
-                    onPressed: _changetoblue,
+                    onPressed: () => _change(
+                        Colors.blue[100], Colors.blue, Colors.blue[900]!),
                     tooltip: 'Blue',
                     child: const Icon(
                       Icons.edit,
@@ -146,7 +149,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 Slider(
                     value: _roundness,
                     min: 0.0,
-                    max: 300.0,
+                    max: 150.0,
                     onChanged: (double newvalue) {
                       setState(() {
                         _roundness = newvalue.roundToDouble();
