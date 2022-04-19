@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 
 void main() {
   runApp(const MyApp());
@@ -48,16 +49,17 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
+  double _size = 200;
+  double _roundness = 50;
+  Color? bgcolor = Colors.blue[100];
+  Color? iconcolor = Colors.blue;
+  Color bordercolor = Colors.blue[900]!;
 
-  void _incrementCounter() {
+  void _change(Color? bg, Color? icon, Color? border) {
     setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
+      iconcolor = icon;
+      bgcolor = bg;
+      bordercolor = border!;
     });
   }
 
@@ -70,11 +72,6 @@ class _MyHomePageState extends State<MyHomePage> {
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
     return Scaffold(
-      appBar: AppBar(
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title),
-      ),
       body: Center(
         // Center is a layout widget. It takes a single child and positions it
         // in the middle of the parent.
@@ -95,20 +92,74 @@ class _MyHomePageState extends State<MyHomePage> {
           // horizontal).
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
+            Container(
+                width: _size,
+                height: _size,
+                decoration: BoxDecoration(
+                    color: bgcolor,
+                    border: Border.all(width: 5.0, color: bordercolor),
+                    borderRadius: BorderRadius.circular(_roundness)),
+                child: Icon(
+                  Icons.alarm,
+                  color: iconcolor,
+                  size: _size - 20,
+                )),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                FloatingActionButton(
+                  onPressed: () =>
+                      _change(Colors.red[100], Colors.red, Colors.red[900]!),
+                  tooltip: 'Red',
+                  child: const Icon(
+                    Icons.edit,
+                  ),
+                  backgroundColor: Colors.red,
+                ),
+                FloatingActionButton(
+                  onPressed: () => _change(
+                      Colors.green[100], Colors.green, Colors.green[900]!),
+                  tooltip: 'Green',
+                  child: const Icon(
+                    Icons.edit,
+                  ),
+                  backgroundColor: Colors.green,
+                ),
+                FloatingActionButton(
+                    onPressed: () => _change(
+                        Colors.blue[100], Colors.blue, Colors.blue[900]!),
+                    tooltip: 'Blue',
+                    child: const Icon(
+                      Icons.edit,
+                    ),
+                    backgroundColor: Colors.blue),
+              ],
             ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
+            Column(
+              children: [
+                Text('Size:$_size                   Roundness:$_roundness'),
+                Slider(
+                    value: _size,
+                    min: 50.0,
+                    max: 300.0,
+                    onChanged: (double newvalue) {
+                      setState(() {
+                        _size = newvalue.roundToDouble();
+                      });
+                    }),
+                Slider(
+                    value: _roundness,
+                    min: 0.0,
+                    max: 150.0,
+                    onChanged: (double newvalue) {
+                      setState(() {
+                        _roundness = newvalue.roundToDouble();
+                      });
+                    }),
+              ],
             ),
           ],
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
