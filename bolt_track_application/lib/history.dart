@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-import 'header.dart';
-
-class SignInScreen extends StatelessWidget {
+import 'Header.dart';
+class History extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: Header(),
+      appBar: Header()
     );
   }
 }
