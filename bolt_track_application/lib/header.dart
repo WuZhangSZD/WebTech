@@ -1,12 +1,31 @@
 import 'package:flutter/material.dart';
 
-class SignInScreen extends StatelessWidget {
+class Header extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title:const Text("my name"),
+    return Container(
+      decoration:BoxDecoration(
+        color: Color(0xffffffff),  
+        border: Border.all(
+          color: Colors.black,
+          width: 8,
+        ),
       ),
+      child:Column(
+        children: <Widget>[
+          Container(
+            child:Row(children:<Widget>[
+              const Text("Bolt Track")
+            ])
+          ),
+          Container(
+            child:Row(children:<Widget>[
+              Expanded(child: const Text("First application"))
+            ]
+            )
+          )
+        ],
+      )
     );
   }
-}
+} 

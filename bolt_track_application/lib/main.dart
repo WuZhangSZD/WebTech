@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import './SignIn.dart';
 import './Register.dart';
-
+import './header.dart';
 void main() {
   runApp(const MyApp());
 }
@@ -16,11 +16,13 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: Colors.blue,
+        fontFamily: 'Roboto',
       ),
       home: const MyHomePage(title: 'Route Page'),
       routes:{
         '/SignIn':(context)=> SignInScreen(),
         '/Register':(context)=> RegisterScreen(),
+        '/Header':(context)=> Header(),
       }
     );
   }
@@ -94,7 +96,7 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: ()=>Navigator.pushNamed(context,"/Register"),
+        onPressed: ()=>Navigator.pushNamed(context,"/Header"),
         tooltip: 'Increment',
         child: const Icon(Icons.add),
       ), // This trailing comma makes auto-formatting nicer for build methods.
